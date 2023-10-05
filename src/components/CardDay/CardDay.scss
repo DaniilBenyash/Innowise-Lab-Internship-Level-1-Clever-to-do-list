@@ -1,0 +1,29 @@
+.card-day{
+    min-width: 100px;
+    height: 150px;
+    border-radius: 20px;
+    border: 1px solid #719191;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: #eaf1f1;
+
+    &_today{
+        background-color: #719191;
+        color: white;
+    }
+
+    &_selected{
+        border: 4px solid #eb9a78;
+    }
+
+    & p{
+        font-size: 20px;
+    }
+
+    &__date{
+        font-weight: 700;
+    }
+}
