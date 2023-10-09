@@ -9,14 +9,13 @@ export const Calendar = ({ selected, setSelected }) => {
         <section className='calendar'>
             {days.map(card => {
                 return (
-                    <button className='calendar__day' onClick={() => setSelected(card.date)}>
                         <CardDay 
                             key={card.date} 
                             day={card.day} 
                             date={card.date} 
                             selected={selected}
+                            setSelected={setSelected}
                         />
-                    </button>
                 ) 
             })}
         </section>    
@@ -44,5 +43,3 @@ function getMonth () {
     }
     return days
 }
-
-getMonth()

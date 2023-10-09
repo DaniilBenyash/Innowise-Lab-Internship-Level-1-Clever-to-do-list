@@ -13,7 +13,7 @@ export const App = () => {
           element={ <MainPage/> }
         />
         <Route
-          path='/task'
+          path='/task/:id'
           element={ <TaskPage/> }
         />
         <Route
