@@ -4,4 +4,21 @@
     h2 {
        margin-bottom: 10px; 
     }
+
+    &__button {
+        position: absolute;
+        bottom: 50px;
+        right: 100px;
+        padding: 20px;
+        font-family: inherit;
+        font-size: 18px;
+        background-color: #eb9a78;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+
+        &:active{
+        background-color: #eb7e50;
+        }
+    }
 }

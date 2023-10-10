@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react"
 import { useUserData } from "../../features/userData/useUserData"
-import { useSignIn } from "../../features/signIn/useSignIn"
+import { useSignUp } from "../../features/signUp/useSignUp"
 import { Input } from "../../components/Input/Input"
 import { Button } from "../../components/Button/Button"
-import { useNavigate, Link } from "react-router-dom"
-import './SignInPage.scss'
+import { useNavigate } from "react-router-dom"
+import './SignUpPage.scss'
 
-export const SignInPage = () => {
+export const SignUpPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('error')
@@ -18,16 +18,17 @@ export const SignInPage = () => {
     const changeInputPassword = (event) => setPassword(event.target.value)
 
     const { userData } = useUserData()
-    const { signInError, signIn } = useSignIn()
+    const { signUpError, signUp } = useSignUp()
 
     const navigate = useNavigate()
 
     useEffect(() => {
-        setError(signInError)
-    }, [signInError])
+        setError(signUpError)
+    }, [signUpError])
 
     useEffect(() => {
         userData && navigate('/')
+        console.log(userData);
     }, [userData, navigate])
 
     function handleSubmit() {
@@ -36,14 +37,14 @@ export const SignInPage = () => {
             password: password
         }
 
-        signIn(formData)
+        signUp(formData)
     }
     
     return (
-        <main className="sign-in">
-            <div className="sign-in__section">
-                <h1>Sign In</h1>
-                <p className="sign-in__error">{error}</p>
+        <main className="sign-up">
+            <div className="sign-up__section">
+                <h1>Sign Up</h1>
+                <p className="sign-up__error">{error}</p>
                 <form action="">
                     <Input
                         label='Email'
@@ -60,13 +61,10 @@ export const SignInPage = () => {
                         onChange={changeInputPassword}
                     />
                     <Button
-                        text='Sign In'
+                        text='Sign Up'
                         onClick={handleSubmit}
                     />
                 </form>
-                <p className="sign-in__link">New to To Do?
-                    <Link to='/register'> Create an account</Link>
-                </p>
             </div>
         </main>    
     )

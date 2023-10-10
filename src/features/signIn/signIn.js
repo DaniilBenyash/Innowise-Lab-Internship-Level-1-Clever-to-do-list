@@ -1,28 +1,26 @@
 const initialState = {
-    userInfo: null,
     isLoading: 'idle',
     error: null,
 }
 
-export default function registerReducer(state = initialState, action) {
+export default function signInReducer(state = initialState, action) {
     switch (action.type) {
-        case 'register/register': {
+        case 'signIn/signIn': {
             return {
                 ...state,
                 isLoading: 'pending',
             }
         }
-        case 'register/registerSuccess': {
+        case 'signIn/signInSuccess': {
             if(state.isLoading === 'pending'){
                 return {
-                    userInfo: action.payload,
                     isLoading: 'idle',
                     error: null
                 }
             }
             break
         }
-        case 'register/registerFailure': {
+        case 'signIn/signInFailure': {
             return {
                 ...state,
                 isLoading: 'idle',
