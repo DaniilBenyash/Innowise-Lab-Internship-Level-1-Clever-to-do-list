@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import './Task.scss';
 
-export const Task = ({id, title, done, setDone}) => {
+export const Task = ({id, title, status, setStatus}) => {
     return (
-        <div className={`task ${done && 'task_done'}`}>
-            <button className={`task__button ${done && 'task__button_done'}`} onClick={() => setDone(!done)}></button>
+        <div className={`task ${status && 'task_done'}`}>
+            <button className={`task__button ${status && 'task__button_done'}`} onClick={() => setStatus(!status)}></button>
             <Link className='task__link' to={'/task/' + id}>
                 {title}
             </Link>  

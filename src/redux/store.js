@@ -3,7 +3,9 @@ import createSagaMiddleware from 'redux-saga'
 import rootReducer from './reducer';
 import { signInSaga } from '../saga/signInSaga'
 import { signUpSaga } from '../saga/signUpSaga';
-import { getUserData } from '../saga/userDataSaga'
+import { getUserSaga } from '../saga/userDataSaga'
+import { getTasksSaga } from '../saga/getTasks';
+import { postTaskSaga } from '../saga/postTask';
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -11,4 +13,6 @@ export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware))
 
 sagaMiddleware.run(signInSaga)
 sagaMiddleware.run(signUpSaga)
-sagaMiddleware.run(getUserData)
+sagaMiddleware.run(getUserSaga)
+sagaMiddleware.run(getTasksSaga)
+sagaMiddleware.run(postTaskSaga)

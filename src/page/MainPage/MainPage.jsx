@@ -3,37 +3,25 @@ import { Header } from "../../components/Header/Header.jsx";
 import { Calendar } from "../../components/Calendar/Calendar.jsx";
 import { TasksSection } from "../../components/TasksSection/TasksSection.jsx";
 import { useUserData } from "../../features/userData/useUserData.js";
-import { getDatabase, ref, set } from "firebase/database";
+import { store } from "../../redux/store.js";
+import { useTasks } from "../../features/tasks/useTasks.js";
 
 export const MainPage = () => {
-    const [selected, setSelected] = useState(new Date().getDate())
+    const [selected, setSelected] = useState(new Date())
 
     const { userData } = useUserData()
 
-    function writeUserData(name, id) {
-        const date = new Date()
-        const db = getDatabase();
-        console.log(date);
-        set(ref(db, id),
-        [
-            
-            {task: 'add new tasks1',
-            time: new Date() + ' '
-            }
-        ]
-            
-        );
-      }
+    const { tasks, getTasks } = useTasks()
+    
     useEffect(() => {
-        console.log(userData)
-        // writeUserData(3, userData.uid)  
-    }, [])
+        userData && getTasks(userData.uid)
+    }, [userData])
 
     return (
         <div>
             <Header user={userData}/>
             <Calendar selected={selected} setSelected={setSelected}/>
-            <TasksSection/>
+            <TasksSection tasks={tasks}/>
         </div>    
     )
 }

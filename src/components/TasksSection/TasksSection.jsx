@@ -3,13 +3,18 @@ import './TasksSection.scss';
 import { Task } from '../Task/Task';
 import { Link } from 'react-router-dom';
 
-export const TasksSection = () => {
-    const [doneTask, setDoneTask] = useState(true)
+export const TasksSection = ({tasks}) => {
+
     
     return (
         <section className='tasks-section'>
             <h2>Tasks</h2>
-            <Task id={1} title='Add new tasks' done={doneTask} setDone={setDoneTask}/>
+            {tasks.map(task => {
+                return (
+                    <Task id={task.id} title={task.task} status={task.status}/>
+                )
+            })}
+            
             <Link to='/task/create'>
                 <button className='tasks-section__button'>Create task</button>
             </Link>
