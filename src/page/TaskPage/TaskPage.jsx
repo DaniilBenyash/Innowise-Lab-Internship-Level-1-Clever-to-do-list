@@ -18,9 +18,9 @@ export const TaskPage = () => {
         const generateId = `f${(~~(Math.random()*1e8)).toString(16)}`
         const taskData = {
             task: task,
-            date: new Date(date) + '',
+            date: date,
             id: generateId,
-            status: 'none'
+            status: false,
         }
         const payload = {
             id: userData.uid,
@@ -49,6 +49,6 @@ export const TaskPage = () => {
 
 function getDate() {
     const date = new Date()
-    const dateForInput = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+    const dateForInput = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
     return dateForInput
 }

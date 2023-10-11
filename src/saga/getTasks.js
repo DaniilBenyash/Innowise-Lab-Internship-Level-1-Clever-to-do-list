@@ -7,12 +7,13 @@ export function* fetchGetTasks(action) {
         const id = action.payload
         const db = getDatabase();
         const starCountRef = ref(db, id);
-        yield put(onValue(starCountRef, (snapshot) => {
+        
+        yield onValue(starCountRef, (snapshot) => {
             const data = snapshot.val();
-            store.dispatch({type: 'tasks/setTasks', payload: data})
-        }))
+            put(store.dispatch({type: 'tasks/setTasks', payload: data}))
+        })
     } catch(error) {
-        console.log(error)
+        yield console.log(error)
     } 
 }
 
