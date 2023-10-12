@@ -14,7 +14,7 @@ export const App = () => {
   const cofig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
   const firebaseConfig = cofig
   const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
+  getDatabase(app);
   const { userData } = useUserData()
 
   const ProtectedRoute = ({children}) => {
