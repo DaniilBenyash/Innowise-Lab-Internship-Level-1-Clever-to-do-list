@@ -56,3 +56,27 @@
         }
     }
 }
+
+@media screen and (max-width: 500px) {
+    .task-page {
+
+        &__task{
+    
+            textarea {
+                width: 100%;
+                
+            }
+        }
+
+        &__date{
+    
+            input{
+                width: 100%;
+            }
+        }
+    
+        &__button {
+            width: 100%;
+        }
+    }
+}

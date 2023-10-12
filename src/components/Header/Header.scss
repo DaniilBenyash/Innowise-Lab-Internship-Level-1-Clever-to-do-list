@@ -20,3 +20,12 @@
         }
     }
 }
+
+@media screen and (max-width: 500px) {
+    .header{
+        
+        &__user-panel{
+            font-size: 0;
+        }
+    }
+}
