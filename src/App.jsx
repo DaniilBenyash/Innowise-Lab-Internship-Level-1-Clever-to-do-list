@@ -2,9 +2,10 @@ import { MainPage } from './page/MainPage/MainPage';
 import { TaskPage } from './page/TaskPage/TaskPage';
 import { SignUpPage } from './page/SignUpPage/SignUpPage';
 import { SignInPage } from './page/SignInPage/SingInPage';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, Navigate } from 'react-router';
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
+import { useUserData } from './features/userData/useUserData';
 
 export const App = () => {
   const firebaseConfig = {
@@ -18,17 +19,33 @@ export const App = () => {
   };
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
+  const { userData } = useUserData()
+
+  const ProtectedRoute = ({children}) => {
+    if(!userData) {
+      return <Navigate to='/signin'/>
+    }
+    return children
+  }
   
   return (
     <div className="App">
       <Routes>
         <Route
           path='/'
-          element={ <MainPage/> }
+          element={ 
+            <ProtectedRoute>
+              <MainPage/>
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/task/:id'
-          element={ <TaskPage/> }
+          element={ 
+            <ProtectedRoute>
+              <TaskPage/>
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/signin'

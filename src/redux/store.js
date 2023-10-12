@@ -7,6 +7,7 @@ import { getUserSaga } from '../saga/userDataSaga'
 import { getTasksSaga } from '../saga/getTasks';
 import { postTaskSaga } from '../saga/postTask';
 import { changeStatusTaskSaga } from '../saga/changeStatusTask';
+import { updateTaskSaga } from '../saga/updateTask';
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -18,3 +19,4 @@ sagaMiddleware.run(getUserSaga)
 sagaMiddleware.run(getTasksSaga)
 sagaMiddleware.run(postTaskSaga)
 sagaMiddleware.run(changeStatusTaskSaga)
+sagaMiddleware.run(updateTaskSaga)

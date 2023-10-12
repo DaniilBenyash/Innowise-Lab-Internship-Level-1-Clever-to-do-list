@@ -3,14 +3,14 @@ import { getDatabase, ref, set,  child, get  } from "firebase/database";
 
 export function* postTask(action) {
     try {
-        const id = action.payload.id
+        const userId = action.payload.userId
         const task = action.payload.task
         const db = getDatabase();
         const dbRef = ref(getDatabase());
 
-        yield get(child(dbRef, id))
+        yield get(child(dbRef, userId))
             .then((snapshot) => {
-                set(ref(db, id), snapshot.exists() ? [...snapshot.val(), task] : [task])
+                set(ref(db, userId), snapshot.exists() ? [...snapshot.val(), task] : [task])
             }
         )
     } catch(error) {

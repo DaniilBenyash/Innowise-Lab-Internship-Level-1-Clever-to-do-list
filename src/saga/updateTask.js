@@ -2,10 +2,11 @@ import { put, takeEvery } from 'redux-saga/effects';
 import { getDatabase, ref, set,  child, get  } from "firebase/database";
 import { store } from '../redux/store';
 
-export function* changeStatusTask(action) {
+export function* updateTask(action) {
     try {
         const userId = action.payload.userId
-        const taskId = action.payload.taskId
+        const task = action.payload.task
+
         const db = getDatabase();
         const dbRef = ref(getDatabase());
 
@@ -13,13 +14,8 @@ export function* changeStatusTask(action) {
             .then((snapshot) => {
                 if(snapshot.exists()) {
                     const tasks = 
-                    snapshot.val()
-                    .map(task => {
-                        return task.id === taskId ?
-                        {...task, status: !task.status}
-                        :
-                        task
-                    })
+                        snapshot.val()
+                        .map(el => el.id === task.id ? task : el)
 
                     set(ref(db, userId), [...tasks] )
                     put(store.dispatch({type: 'tasks/getTasks', payload: userId}))
@@ -31,6 +27,6 @@ export function* changeStatusTask(action) {
     } 
 }
 
-export function* changeStatusTaskSaga() {
-    yield takeEvery('tasks/changeStatusTask', changeStatusTask)
+export function* updateTaskSaga() {
+    yield takeEvery('tasks/updateTask', updateTask)
 }

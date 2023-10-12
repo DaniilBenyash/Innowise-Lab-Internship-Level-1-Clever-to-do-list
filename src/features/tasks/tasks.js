@@ -17,9 +17,6 @@ export default function tasksReducer(state = initialState, action) {
         case 'tasks/changeStatusTask': {
             return state
         }
-        case 'tasks/deleteTasks': {
-            return state
-        }
         default:
 
         return state
