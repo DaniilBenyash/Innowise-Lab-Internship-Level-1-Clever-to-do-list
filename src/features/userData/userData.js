@@ -9,9 +9,13 @@ export default function userDataReducer(state = initialState, action) {
                 userData: action.payload
             }
         }
+        case 'userData/deleteUser': {
+            return {
+                userData: null
+            }
+        }
         
         default:
-
-        return state
+            return state
     }
   }

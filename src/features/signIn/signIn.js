@@ -28,7 +28,6 @@ export default function signInReducer(state = initialState, action) {
             }
         }
         default:
-
-        return state
+            return state
     }
   }

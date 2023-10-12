@@ -4,8 +4,10 @@ import { store } from '../redux/store';
 
 export function* fetchSignUp(action) {
     try {
+        const email = action.payload.email
+        const password = action.payload.password
         const auth = getAuth();
-        yield createUserWithEmailAndPassword(auth, action.payload.email, action.payload.password)
+        yield createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
             put(store.dispatch({type: 'signUp/signUpSuccess', payload: user}))

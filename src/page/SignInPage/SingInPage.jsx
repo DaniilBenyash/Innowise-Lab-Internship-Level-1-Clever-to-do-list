@@ -35,7 +35,6 @@ export const SignInPage = () => {
             email: email,
             password: password
         }
-
         signIn(formData)
     }
     
@@ -51,6 +50,7 @@ export const SignInPage = () => {
                         placeholder='Your email'
                         value={email}
                         onChange={changeInputEmail}
+                        type='email'
                     />
                     <Input
                         label='Password'
@@ -58,6 +58,7 @@ export const SignInPage = () => {
                         placeholder='Your password'
                         value={password}
                         onChange={changeInputPassword}
+                        type='password'
                     />
                     <Button
                         text='Sign In'

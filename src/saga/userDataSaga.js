@@ -10,7 +10,6 @@ export function* fetchGetUserData() {
 }
 
 export function* getUserSaga() {
-    
     yield takeEvery('signIn/signInSuccess', fetchGetUserData)
     yield takeEvery('signUp/signUpSuccess', fetchGetUserData)
 }

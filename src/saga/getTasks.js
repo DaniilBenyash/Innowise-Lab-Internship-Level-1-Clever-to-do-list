@@ -12,6 +12,7 @@ export function* fetchGetTasks(action) {
             const data = snapshot.val();
             put(store.dispatch({type: 'tasks/setTasks', payload: data}))
         })
+        
     } catch(error) {
         yield console.log(error)
     } 

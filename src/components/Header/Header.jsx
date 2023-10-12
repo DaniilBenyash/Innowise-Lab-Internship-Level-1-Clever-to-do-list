@@ -1,8 +1,10 @@
 import React from 'react';
 import './Header.scss';
 import { Link } from 'react-router-dom';
+import { useUserData } from '../../features/userData/useUserData';
 
 export const Header = ({user = null}) => {
+    const { deleteUser } = useUserData()
     return (
         <header className='header'>
             <Link to='/'>
@@ -11,7 +13,7 @@ export const Header = ({user = null}) => {
             {user ?
             <div className='header__user-panel'>
                 Hello, {user.email}
-                <button>
+                <button onClick={deleteUser}>
                     <img width="35" height="35" src="https://img.icons8.com/ios-filled/50/fire-exit.png" alt="exit"/>
                 </button>
             </div>

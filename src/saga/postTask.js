@@ -10,9 +10,10 @@ export function* postTask(action) {
 
         yield get(child(dbRef, userId))
             .then((snapshot) => {
-                set(ref(db, userId), snapshot.exists() ? [...snapshot.val(), task] : [task])
+                put(set(ref(db, userId), snapshot.exists() ? [...snapshot.val(), task] : [task]))
             }
         )
+
     } catch(error) {
         console.log(error)
     } 

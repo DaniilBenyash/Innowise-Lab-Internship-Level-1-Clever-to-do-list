@@ -26,6 +26,7 @@ export function* changeStatusTask(action) {
                 }
             }
         ) 
+
     } catch(error) {
         console.log(error)
     } 
