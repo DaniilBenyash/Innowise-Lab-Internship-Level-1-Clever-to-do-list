@@ -36,13 +36,14 @@ export const TaskPage = () => {
             userId: userData.uid,
             task: taskData
         }
-        
-        update ?
-        store.dispatch({type: 'tasks/updateTask', payload: payload})
-        :
-        store.dispatch({type: 'tasks/postTask', payload: payload})
-
-        navigate('/')
+        if(task) {
+            update ?
+            store.dispatch({type: 'tasks/updateTask', payload: payload})
+            :
+            store.dispatch({type: 'tasks/postTask', payload: payload})
+    
+            navigate('/')
+        }
     }
     //-----//
 
