@@ -11,15 +11,8 @@ import { useUserData } from './features/userData/useUserData';
 const ThemeContext = createContext(null)
 
 export const App = () => {
-  const firebaseConfig = {
-    apiKey: "AIzaSyBDjC-qIPwa9yh63ZBORkVCUqd4LlphIWg",
-    authDomain: "todo-f7753.firebaseapp.com",
-    projectId: "todo-f7753",
-    storageBucket: "todo-f7753.appspot.com",
-    messagingSenderId: "556863220441",
-    appId: "1:556863220441:web:41b10295ee7cf8f7f42cc8",
-    databaseURL: "https://todo-f7753-default-rtdb.europe-west1.firebasedatabase.app",
-  };
+  const cofig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
+  const firebaseConfig = cofig
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const { userData } = useUserData()
@@ -34,7 +27,7 @@ export const App = () => {
   const [theme, setTheme] = useState('light')
 
   return (
-    <ThemeContext.Provider theme ={{theme, setTheme}}>
+    <ThemeContext.Provider value={{theme, setTheme}}>
       <div className='App' >
         <Routes>
           <Route
