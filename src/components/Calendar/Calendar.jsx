@@ -41,7 +41,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
     }
     }, [actionInSight, lastItem]);
     //-----//
-    // Проверка есть ли в дне задачи
+    // Создание списка дней с задачами
     const { tasks } = useTasks()
     const daysWithTasks = useMemo(() => {
         if(tasks) {
