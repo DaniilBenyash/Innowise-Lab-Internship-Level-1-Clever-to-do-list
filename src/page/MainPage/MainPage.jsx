@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Header } from "../../components/Header/Header.jsx";
 import { Calendar } from "../../components/Calendar/Calendar.jsx";
 import { TasksSection } from "../../components/TasksSection/TasksSection.jsx";
@@ -14,7 +14,7 @@ export const MainPage = () => {
     //Получение задач
     const { userData } = useUserData()
     const { tasks, getTasks } = useTasks()
-    
+
     useEffect(() => {
         userData && getTasks(userData.uid)
     }, [userData])

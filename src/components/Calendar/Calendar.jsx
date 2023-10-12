@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef, createRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, createRef, useCallback, useMemo } from 'react';
 import './Calendar.scss';
 import { CardDay } from '../CardDay/CardDay';
+import { useTasks } from '../../features/tasks/useTasks';
 
 export const Calendar = ({ selectedDate, setSelectedDate }) => {
     // Создание массива дат
@@ -40,6 +41,23 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
     }
     }, [actionInSight, lastItem]);
     //-----//
+    // Проверка есть ли в дне задачи
+    const { tasks } = useTasks()
+    const daysWithTasks = useMemo(() => {
+        if(tasks) {
+            const days = {}
+            tasks.forEach((task) => {
+                const day = task.date
+                !days[day] ?
+                days[day] = [task.status]
+                :
+                days[day].push(task.status)
+            })
+            return days
+        }
+
+    }, [tasks])
+    //-----//
     return (
         <section className='calendar'>
             {days.map((day, id) => {
@@ -50,6 +68,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
                     ref={lastItem}
+                    daysWithTasks={daysWithTasks}
                 />
                 :
                 <CardDay 
@@ -57,6 +76,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
                     date={day}
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
+                    daysWithTasks={daysWithTasks}
                 />
             })}
         </section>    
