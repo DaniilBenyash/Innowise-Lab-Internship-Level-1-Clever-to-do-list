@@ -1,5 +1,5 @@
 import './TaskPage.scss'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from "react-router"
 import { useNavigate } from 'react-router-dom';
 import { Header } from "../../components/Header/Header";
@@ -9,16 +9,19 @@ import { store } from '../../redux/store';
 
 export const TaskPage = () => {
     const { id } = useParams();
-    const { userData } = useUserData()
-    const [task, setTask] = useState('')
-    const [date, setDate] = useState(getDate())
-    const navigate = useNavigate()
     const { tasks } = useTasks()
-    const [update, setUpdate] = useState(false)
-    
+
+    const taskToUpdate =  tasks && tasks.find(task => task.id === id)
+
+    const { userData } = useUserData()
+    const [update] = useState(id === 'create' ? false : true)
+    const [task, setTask] = useState(update ? taskToUpdate.task : '' )
+    const [date, setDate] = useState(update ? taskToUpdate.date : getDate())
+
+    const navigate = useNavigate()
+
     const changeTaskTextarea = (event) => setTask(event.target.value)
     const changeDateInput = (event) => setDate(event.target.value)
-    const taskToUpdate =  tasks && tasks.find(task => task.id === id)
 
     // Создание или обновление таска
     function handleClick() {
@@ -43,16 +46,6 @@ export const TaskPage = () => {
     }
     //-----//
 
-    // Проверка операции (создание или обновление)
-    useEffect(() => {
-        if(id !== 'create') {
-            setTask(taskToUpdate.task)
-            setDate(taskToUpdate.date)
-            setUpdate(true)
-        }
-    }, [id])
-    //-----//
-
     return (
         <main>
             <Header user={userData} />
@@ -70,7 +63,7 @@ export const TaskPage = () => {
     )
 }
 
-// Создание сегодняшней даты (для ограничения календаря)
+// Создание сегодняшней даты
 function getDate() {
     const date = new Date()
     const dateForInput = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
