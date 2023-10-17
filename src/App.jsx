@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { ThemeProvider } from './components/ThemeProvider/ThemeProvider';
-import { RoutesComponent } from "./components/RoutesComponent/RoutesComponent";
+import { RoutesComponent } from "./Router/RoutesComponent/RoutesComponent";
 
 export const App = () => {
   const cofig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
