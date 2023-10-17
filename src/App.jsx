@@ -1,4 +1,3 @@
-import { createContext, useState } from 'react';
 import { MainPage } from './page/MainPage/MainPage';
 import { TaskPage } from './page/TaskPage/TaskPage';
 import { SignUpPage } from './page/SignUpPage/SignUpPage';
@@ -7,8 +6,7 @@ import { Route, Routes, Navigate } from 'react-router';
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { useUserData } from './features/userData/useUserData';
-
-const ThemeContext = createContext(null)
+import { ThemeProvider } from './components/ThemeProvider/ThemeProvider';
 
 export const App = () => {
   const cofig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG)
@@ -24,10 +22,8 @@ export const App = () => {
     return children
   }
 
-  const [theme, setTheme] = useState('light')
-
   return (
-    <ThemeContext.Provider value={{theme, setTheme}}>
+    <ThemeProvider>
       <div className='App' >
         <Routes>
           <Route
@@ -56,6 +52,6 @@ export const App = () => {
           />
         </Routes>
       </div> 
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }
