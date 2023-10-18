@@ -26,6 +26,5 @@
           }
         ],
         "react/prop-types": [0]
-        // "react/display-name": [<enabled>, { "ignoreTranspilerName": <boolean>, "checkContextObjects": <boolean> }]
     }
 } 

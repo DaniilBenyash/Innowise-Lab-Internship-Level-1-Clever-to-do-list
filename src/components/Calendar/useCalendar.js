@@ -1,14 +1,15 @@
 import { useState, createRef, useRef, useCallback, useEffect } from 'react';
 
-export const useCalndar = () => {
-  const [numberDays, setNumberDays] = useState(30);
+export const useCalendar = () => {
+  const numbers = 30;
+  const [numberDays, setNumberDays] = useState(numbers);
   const lastDay = createRef();
   const observerLoader = useRef();
 
   const actionInSight = useCallback(
     (entries) => {
       if (entries[0].isIntersecting) {
-        setNumberDays(numberDays + 30);
+        setNumberDays(numberDays + numbers);
       }
     },
     [numberDays]

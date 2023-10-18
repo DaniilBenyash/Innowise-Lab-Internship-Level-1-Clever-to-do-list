@@ -5,7 +5,6 @@ export const CardDay = forwardRef(function Hello(
   { date, selectedDate, setSelectedDate, daysWithTasks },
   ref
 ) {
-  // Замена чисел в дате на слова
   const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const month = [
     'Jan',
@@ -24,8 +23,7 @@ export const CardDay = forwardRef(function Hello(
   const day = new Date(date);
   const dayOfTheWeek = week[new Date(date).getDay()];
   const dayOfTheMonth = day.getDate() + ' ' + month[day.getMonth()];
-  //-----//
-  console.log(styles);
+
   return (
     <button
       ref={ref}

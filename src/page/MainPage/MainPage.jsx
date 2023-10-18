@@ -7,19 +7,17 @@ import { useTasks } from '../../features/tasks/useTasks.js';
 import { store } from '../../redux/store.js';
 
 export const MainPage = () => {
-  //Установка выбранного дня
   const date = new Date();
   const today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
   const [selectedDate, setSelectedDate] = useState(today);
-  //-----//
-  //Получение задач
+
   const { userData } = useUserData();
   const { tasks } = useTasks();
 
   useEffect(() => {
     userData && store.dispatch({ type: 'tasks/getTasks', payload: userData.uid });
   }, [userData]);
-  //-----//
+
   return (
     <div>
       <Header user={userData} />

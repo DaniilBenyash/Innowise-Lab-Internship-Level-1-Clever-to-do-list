@@ -24,7 +24,6 @@ export const TaskPage = () => {
   const changeTaskTextarea = (event) => setTask(event.target.value);
   const changeDateInput = (event) => setDate(event.target.value);
 
-  // Создание или обновление таска
   function handleClick() {
     const generateId = `f${(~~(Math.random() * 1e8)).toString(16)}`;
     const taskData = {
@@ -45,7 +44,6 @@ export const TaskPage = () => {
       navigate(MAIN_PAGE);
     }
   }
-  //-----//
 
   return (
     <main>
