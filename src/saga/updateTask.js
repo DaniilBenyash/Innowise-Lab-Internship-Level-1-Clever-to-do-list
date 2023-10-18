@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import { store } from '../redux/store';
-import { FirebaseTodoService } from '../DBServices/FirebaseTodoService';
+import { FirebaseTodoService } from '../firebaseServices/FirebaseTodoService';
 
 export function* updateTask(action) {
     try {

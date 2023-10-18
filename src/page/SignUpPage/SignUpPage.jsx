@@ -5,6 +5,7 @@ import { Input } from "../../components/Input/Input"
 import { Button } from "../../components/Button/Button"
 import { useNavigate } from "react-router-dom"
 import './SignUpPage.scss'
+import { MAIN_PAGE } from "../../variables/routes"
 
 export const SignUpPage = () => {
     const [email, setEmail] = useState('')
@@ -28,7 +29,7 @@ export const SignUpPage = () => {
 
     useEffect(() => {
         console.log(userData);
-        userData && navigate('/')
+        userData && navigate(MAIN_PAGE)
         console.log(userData);
     }, [userData, navigate])
 

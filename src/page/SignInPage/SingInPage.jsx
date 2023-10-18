@@ -5,6 +5,7 @@ import { Input } from "../../components/Input/Input"
 import { Button } from "../../components/Button/Button"
 import { useNavigate, Link } from "react-router-dom"
 import './SignInPage.scss'
+import { MAIN_PAGE, SIGN_UP } from "../../variables/routes"
 
 export const SignInPage = () => {
     const [email, setEmail] = useState('')
@@ -27,7 +28,7 @@ export const SignInPage = () => {
     }, [signInError])
 
     useEffect(() => {
-        userData && navigate('/')
+        userData && navigate(MAIN_PAGE)
     }, [userData, navigate])
 
     function handleSubmit() {
@@ -66,7 +67,7 @@ export const SignInPage = () => {
                     />
                 </form>
                 <p className="sign-in__link">New to To Do?
-                    <Link to='/register'> Create an account</Link>
+                    <Link to={SIGN_UP}> Create an account</Link>
                 </p>
             </div>
         </main>    

@@ -4,12 +4,13 @@ import { SignUpPage } from '../../page/SignUpPage/SignUpPage';
 import { SignInPage } from '../../page/SignInPage/SingInPage';
 import { ProtectedRoute } from '../ProtectedRouter/ProtectedRoute';
 import { Route, Routes } from 'react-router';
+import { MAIN_PAGE, TASK_PAGE, SIGN_IN, SIGN_UP } from '../../variables/routes';
 
 export const RoutesComponent = () => {
     return (
         <Routes>
           <Route
-            path='/'
+            path={MAIN_PAGE}
             element={ 
               <ProtectedRoute>
                 <MainPage/>
@@ -17,7 +18,7 @@ export const RoutesComponent = () => {
             }
           />
           <Route
-            path='/task/:id'
+            path={TASK_PAGE}
             element={ 
               <ProtectedRoute>
                 <TaskPage/>
@@ -25,11 +26,11 @@ export const RoutesComponent = () => {
             }
           />
           <Route
-            path='/signin'
+            path={SIGN_IN}
             element={ <SignInPage/> }
           />
           <Route
-            path='/register'
+            path={SIGN_UP}
             element={ <SignUpPage/> }
           />
         </Routes>    

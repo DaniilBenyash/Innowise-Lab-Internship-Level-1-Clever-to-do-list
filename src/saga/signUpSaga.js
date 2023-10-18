@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import { store } from '../redux/store';
-import { FirebaseAuthService } from '../DBServices/FirebaseAuthService';
+import { FirebaseAuthService } from '../firebaseServices/FirebaseAuthService';
 
 export function* fetchSignUp(action) {
     try {

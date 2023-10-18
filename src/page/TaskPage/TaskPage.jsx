@@ -6,6 +6,7 @@ import { Header } from "../../components/Header/Header";
 import { useUserData } from "../../features/userData/useUserData.js";
 import { useTasks } from '../../features/tasks/useTasks';
 import { store } from '../../redux/store';
+import { MAIN_PAGE } from '../../variables/routes';
 
 export const TaskPage = () => {
     const { id } = useParams();
@@ -42,7 +43,7 @@ export const TaskPage = () => {
             :
             store.dispatch({type: 'tasks/postTask', payload: payload})
     
-            navigate('/')
+            navigate(MAIN_PAGE)
         }
     }
     //-----//
