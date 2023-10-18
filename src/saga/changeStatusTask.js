@@ -1,31 +1,15 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { getDatabase, ref, set,  child, get  } from "firebase/database";
 import { store } from '../redux/store';
+import { FirebaseTodoService } from '../DBServices/FirebaseTodoService';
 
 export function* changeStatusTask(action) {
     try {
         const userId = action.payload.userId
         const taskId = action.payload.taskId
-        const db = getDatabase();
-        const dbRef = ref(getDatabase());
+        const firebase = new FirebaseTodoService(userId)
+        const tasks = yield firebase.changeStatusTask(taskId)
 
-        yield get(child(dbRef, userId))
-            .then((snapshot) => {
-                if(snapshot.exists()) {
-                    const tasks = 
-                    snapshot.val()
-                    .map(task => {
-                        return task.id === taskId ?
-                        {...task, status: !task.status}
-                        :
-                        task
-                    })
-
-                    set(ref(db, userId), [...tasks] )
-                    put(store.dispatch({type: 'tasks/getTasks', payload: userId}))
-                }
-            }
-        ) 
+        yield put(store.dispatch({type: 'tasks/setTasks', payload: tasks}))
 
     } catch(error) {
         console.log(error)

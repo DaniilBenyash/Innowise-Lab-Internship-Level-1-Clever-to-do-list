@@ -6,6 +6,7 @@ export default function tasksReducer(state = initialState, action) {
             return state
         }
         case 'tasks/setTasks': {
+            if(!action.payload) return []
             return action.payload
         }
         case 'tasks/postTask': {

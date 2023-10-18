@@ -27,6 +27,7 @@ export const SignUpPage = () => {
     }, [signUpError])
 
     useEffect(() => {
+        console.log(userData);
         userData && navigate('/')
         console.log(userData);
     }, [userData, navigate])
