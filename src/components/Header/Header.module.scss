@@ -9,7 +9,7 @@
         font-weight: 700;
     }
 
-    &__user-panel{
+    &__user_panel{
         
         font-size: 18px;
         button {
@@ -24,7 +24,7 @@
 @media screen and (max-width: 500px) {
     .header{
         
-        &__user-panel{
+        &__user_panel{
             font-size: 0;
         }
     }

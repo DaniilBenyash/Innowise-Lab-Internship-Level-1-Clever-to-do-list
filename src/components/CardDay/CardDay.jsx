@@ -1,4 +1,4 @@
-import './CardDay.scss';
+import styles from './CardDay.module.scss'
 import { forwardRef } from 'react';
 
 export const CardDay = forwardRef(({date, selectedDate, setSelectedDate, daysWithTasks}, ref) => {
@@ -9,18 +9,24 @@ export const CardDay = forwardRef(({date, selectedDate, setSelectedDate, daysWit
     const dayOfTheWeek = week[new Date(date).getDay()]
     const dayOfTheMonth = day.getDate() + ' ' + month[day.getMonth()]
     //-----//
+    console.log(styles)  
     return (
         <button 
             ref={ref} 
-            className={`card-day ${selectedDate === date && 'card-day_selected-date'}`} 
+            className={`${styles.card_day}  ${selectedDate === date && styles.card_day_selected-date}`} 
             onClick={() => setSelectedDate(date)}
         >
-            <p className='card-day__day'>{dayOfTheWeek}</p>
-            <p className='card-day__date'>{dayOfTheMonth}</p>
-            <div className='card-day__points'>
+            <p>{dayOfTheWeek}</p>
+            <p className={styles.card_day__date}>{dayOfTheMonth}</p>
+            <div className={styles.card_day__points}>
                 {daysWithTasks[date] ?
                     daysWithTasks[date].map((el,id) => {
-                        return <div key={id} className={`card-day__point card-day__point_${el ? 'done' : 'notDone'}`}></div>
+                        return (
+                        <div 
+                        key={id} 
+                        className={`${styles.card_day__point} ${el ? styles.card_day__point_done : styles.card_day__point_notDone}`}>
+                        </div>
+                        )
                     })
                     :
                     <div></div>

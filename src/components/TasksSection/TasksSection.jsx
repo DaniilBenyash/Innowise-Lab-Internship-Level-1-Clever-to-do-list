@@ -1,4 +1,4 @@
-import './TasksSection.scss';
+import styles from './TasksSection.module.scss'
 import { Task } from '../Task/Task';
 import { Link } from 'react-router-dom';
 import { useTasks } from '../../features/tasks/useTasks';
@@ -7,7 +7,7 @@ import { TASK_PAGE_ID } from '../../variables/routes';
 export const TasksSection = ({tasks, selectedDate, userData}) => {
     const { changeStatusTask } = useTasks()
     return (
-        <section className='tasks-section'>
+        <section className={styles.tasks_section}>
             <h2>Tasks</h2>
             {tasks && tasks.filter(task => task.date === selectedDate).map(task => {
                 return (
@@ -15,7 +15,7 @@ export const TasksSection = ({tasks, selectedDate, userData}) => {
                 )
             })}
             <Link to={TASK_PAGE_ID('create')}>
-                <button className='tasks-section__button'>Create task</button>
+                <button className={styles.tasks_section__button}>Create task</button>
             </Link>
             
         </section>    

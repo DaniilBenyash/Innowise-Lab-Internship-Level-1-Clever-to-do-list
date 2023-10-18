@@ -1,4 +1,4 @@
-import './TaskPage.scss'
+import styles from './TaskPage.module.scss'
 import { useState } from 'react';
 import { useParams } from "react-router"
 import { useNavigate } from 'react-router-dom';
@@ -52,15 +52,15 @@ export const TaskPage = () => {
         <main>
             <Header user={userData} />
             <h1>{update ? 'Update task' : 'Save task'}</h1>
-            <div className="task-page__task">
+            <div className={styles.task_page__task}>
                 <label htmlFor="">Task</label>
                 <textarea name="" id="" cols="30" rows="10" placeholder='Your task' value={task} onChange={changeTaskTextarea}></textarea>
             </div>
-            <div className='task-page__date'>
+            <div className={styles.task_page__date}>
                 <label htmlFor="">Date</label>
                 <input type="date" min={getDate()} value={date} onChange={changeDateInput}/>
             </div>
-            <button className='task-page__button' onClick={handleClick}>{update ? 'Update' : 'Save'}</button>
+            <button className={styles.task_page__button} onClick={handleClick}>{update ? 'Update' : 'Save'}</button>
         </main>
     )
 }

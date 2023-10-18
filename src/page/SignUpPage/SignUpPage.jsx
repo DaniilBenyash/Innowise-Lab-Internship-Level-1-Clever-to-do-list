@@ -4,7 +4,7 @@ import { useSignUp } from "../../features/signUp/useSignUp"
 import { Input } from "../../components/Input/Input"
 import { Button } from "../../components/Button/Button"
 import { useNavigate } from "react-router-dom"
-import './SignUpPage.scss'
+import styles from './SignUpPage.module.scss'
 import { MAIN_PAGE } from "../../variables/routes"
 
 export const SignUpPage = () => {
@@ -42,10 +42,10 @@ export const SignUpPage = () => {
     }
     
     return (
-        <main className="sign-up">
-            <div className="sign-up__section">
+        <main className={styles.sign_up}>
+            <div className={styles.sign_up__section}>
                 <h1>Sign Up</h1>
-                <p className="sign-up__error">{error}</p>
+                <p className={styles.sign_up__error}>{error}</p>
                 <form action="">
                     <Input
                         label='Email'

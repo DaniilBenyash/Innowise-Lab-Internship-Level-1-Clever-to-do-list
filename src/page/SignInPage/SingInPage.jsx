@@ -4,7 +4,7 @@ import { useSignIn } from "../../features/signIn/useSignIn"
 import { Input } from "../../components/Input/Input"
 import { Button } from "../../components/Button/Button"
 import { useNavigate, Link } from "react-router-dom"
-import './SignInPage.scss'
+import styles from './SignInPage.module.scss'
 import { MAIN_PAGE, SIGN_UP } from "../../variables/routes"
 
 export const SignInPage = () => {
@@ -40,10 +40,10 @@ export const SignInPage = () => {
     }
     
     return (
-        <main className="sign-in">
-            <div className="sign-in__section">
+        <main className={styles.sign_in}>
+            <div className={styles.sign_in__section}>
                 <h1>Sign In</h1>
-                <p className="sign-in__error">{error}</p>
+                <p className={styles.sign_in__error}>{error}</p>
                 <form action="">
                     <Input
                         label='Email'
@@ -66,7 +66,7 @@ export const SignInPage = () => {
                         onClick={handleSubmit}
                     />
                 </form>
-                <p className="sign-in__link">New to To Do?
+                <p className={styles.sign_in__link}>New to To Do?
                     <Link to={SIGN_UP}> Create an account</Link>
                 </p>
             </div>

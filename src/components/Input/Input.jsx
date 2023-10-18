@@ -1,14 +1,14 @@
 import React from 'react';
-import './Input.scss';
+import styles from './Input.module.scss'
 
 export const Input = React.forwardRef(({label, placeholder, onChange, value, type = 'input'}, ref) => {
     return (
-        <label className='input'>
+        <label className={styles.input}>
             {label}
             <input 
                 type={type}
                 ref={ref}
-                className='input__form'
+                className={styles.input__form}
                 placeholder={placeholder} 
                 value={value} 
                 onChange={onChange}

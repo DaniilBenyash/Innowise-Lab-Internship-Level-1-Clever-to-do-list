@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './Task.scss';
+import styles from './Task.module.scss'
 import { TASK_PAGE_ID } from '../../variables/routes';
 
 export const Task = ({id, title, status, changeStatus, userData}) => {
@@ -8,9 +8,12 @@ export const Task = ({id, title, status, changeStatus, userData}) => {
         taskId: id
     }
     return (
-        <div className={`task ${status && 'task_done'}`}>
-            <button className={`task__button ${status && 'task__button_done'}`} onClick={() => changeStatus(data)}></button>
-            <Link className='task__link' to={TASK_PAGE_ID(id)}>
+        <div className={`${styles.task} ${status && styles.task_done}`}>
+            <button 
+                className={`${styles.task__button} ${status && styles.task__button_done}`} 
+                onClick={() => changeStatus(data)}
+            ></button>
+            <Link className={styles.task__link} to={TASK_PAGE_ID(id)}>
                 {title}
             </Link>  
         </div>      

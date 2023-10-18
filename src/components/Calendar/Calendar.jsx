@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, createRef, useCallback, useMemo } from 'react';
-import './Calendar.scss';
+import styles from './Calendar.module.scss'
 import { CardDay } from '../CardDay/CardDay';
 import { useTasks } from '../../features/tasks/useTasks';
 
@@ -59,7 +59,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
     }, [tasks])
     //-----//
     return (
-        <section className='calendar'>
+        <section className={styles.calendar}>
             {days.map((day, id) => {
                 return id === days.length - 1 ?
                 <CardDay 
