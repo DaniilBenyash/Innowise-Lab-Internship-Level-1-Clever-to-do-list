@@ -8,13 +8,13 @@ import { postTaskSaga } from '../saga/postTask';
 import { changeStatusTaskSaga } from '../saga/changeStatusTask';
 import { updateTaskSaga } from '../saga/updateTask';
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
-export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware))
+export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
-sagaMiddleware.run(signInSaga)
-sagaMiddleware.run(signUpSaga)
-sagaMiddleware.run(getTasksSaga)
-sagaMiddleware.run(postTaskSaga)
-sagaMiddleware.run(changeStatusTaskSaga)
-sagaMiddleware.run(updateTaskSaga)
+sagaMiddleware.run(signInSaga);
+sagaMiddleware.run(signUpSaga);
+sagaMiddleware.run(getTasksSaga);
+sagaMiddleware.run(postTaskSaga);
+sagaMiddleware.run(changeStatusTaskSaga);
+sagaMiddleware.run(updateTaskSaga);
