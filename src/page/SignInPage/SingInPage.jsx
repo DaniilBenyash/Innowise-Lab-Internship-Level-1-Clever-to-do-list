@@ -1,25 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUserData } from '../../features/userData/useUserData';
-import { useSignIn } from '../../features/signIn/useSignIn';
-import { Input } from '../../components/Input/Input';
-import { Button } from '../../components/Button/Button';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './SignInPage.module.scss';
 import { MAIN_PAGE, SIGN_UP } from '../../variables/routes';
+import { Form } from '../../components/Form/Form';
 
 export const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('error');
 
-  const inputEmail = useRef(null);
-  const inputPassword = useRef(null);
+  const changeInputEmail = (email) => setEmail(email);
+  const changeInputPassword = (password) => setPassword(password);
 
-  const changeInputEmail = (event) => setEmail(event.target.value);
-  const changeInputPassword = (event) => setPassword(event.target.value);
-
-  const { userData } = useUserData();
-  const { signInError, signIn } = useSignIn();
+  const { userData, signInError, signIn } = useUserData();
 
   const navigate = useNavigate();
 
@@ -44,25 +38,14 @@ export const SignInPage = () => {
       <div className={styles.sign_in__section}>
         <h1>Sign In</h1>
         <p className={styles.sign_in__error}>{error}</p>
-        <form action="">
-          <Input
-            label="Email"
-            ref={inputEmail}
-            placeholder="Your email"
-            value={email}
-            onChange={changeInputEmail}
-            type="email"
-          />
-          <Input
-            label="Password"
-            ref={inputPassword}
-            placeholder="Your password"
-            value={password}
-            onChange={changeInputPassword}
-            type="password"
-          />
-          <Button text="Sign In" onClick={handleSubmit} />
-        </form>
+        <Form
+          valueEmail={email}
+          onChangeEmail={changeInputEmail}
+          valuePassword={password}
+          onChangePassword={changeInputPassword}
+          nameButton="Sign In"
+          onClickButton={handleSubmit}
+        />
         <p className={styles.sign_in__link}>
           New to To Do?
           <Link to={SIGN_UP}> Create an account</Link>

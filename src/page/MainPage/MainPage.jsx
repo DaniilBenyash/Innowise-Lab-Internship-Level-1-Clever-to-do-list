@@ -5,10 +5,9 @@ import { TasksSection } from '../../components/TasksSection/TasksSection.jsx';
 import { useUserData } from '../../features/userData/useUserData.js';
 import { useTasks } from '../../features/tasks/useTasks.js';
 import { store } from '../../redux/store.js';
+import { today } from '../../utils/getToday.js';
 
 export const MainPage = () => {
-  const date = new Date();
-  const today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
   const [selectedDate, setSelectedDate] = useState(today);
 
   const { userData } = useUserData();
@@ -22,7 +21,7 @@ export const MainPage = () => {
     <div>
       <Header user={userData} />
       <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-      <TasksSection tasks={tasks} selectedDate={selectedDate} userData={userData} />
+      <TasksSection tasks={tasks} selectedDate={selectedDate} />
     </div>
   );
 };

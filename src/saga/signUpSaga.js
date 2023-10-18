@@ -11,10 +11,10 @@ export function* fetchSignUp(action) {
 
     put(store.dispatch({ type: 'userData/getUser', payload: user }));
   } catch (error) {
-    yield put(store.dispatch({ type: 'signUp/signUpFailure', payload: error.code }));
+    yield put(store.dispatch({ type: 'userData/signUpFailure', payload: error.code }));
   }
 }
 
 export function* signUpSaga() {
-  yield takeEvery('signUp/signUp', fetchSignUp);
+  yield takeEvery('userData/signUp', fetchSignUp);
 }

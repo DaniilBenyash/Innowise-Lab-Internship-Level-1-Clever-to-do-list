@@ -15,9 +15,9 @@ export const CardDay = forwardRef(function Hello(
     [styles.card_day_selected_date]: selectedDate === date
   });
 
-  const handleClickButton = () => setSelectedDate(date);
+  const handleSelectedDate = () => setSelectedDate(date);
   return (
-    <button ref={ref} className={CardDayClass} onClick={handleClickButton}>
+    <button ref={ref} className={CardDayClass} onClick={handleSelectedDate}>
       <p>{dayOfTheWeek}</p>
       <p className={styles.card_day__date}>{dayOfTheMonth}</p>
       <div className={styles.card_day__points}>
