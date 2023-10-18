@@ -1,34 +1,21 @@
 import styles from './CardDay.module.scss';
 import { forwardRef } from 'react';
+import { WEEK, MONTH } from '../../variables/days';
+import classNames from 'classnames';
 
 export const CardDay = forwardRef(function Hello(
   { date, selectedDate, setSelectedDate, daysWithTasks },
   ref
 ) {
-  const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const month = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
   const day = new Date(date);
-  const dayOfTheWeek = week[new Date(date).getDay()];
-  const dayOfTheMonth = day.getDate() + ' ' + month[day.getMonth()];
+  const dayOfTheWeek = WEEK[new Date(date).getDay()];
+  const dayOfTheMonth = day.getDate() + ' ' + MONTH[day.getMonth()];
 
+  const CardDayClass = classNames(styles.card_day, {
+    [styles.card_day_selected_date]: selectedDate === date
+  });
   return (
-    <button
-      ref={ref}
-      className={`${styles.card_day}  ${selectedDate === date && styles.card_day_selected - date}`}
-      onClick={() => setSelectedDate(date)}>
+    <button ref={ref} className={CardDayClass} onClick={() => setSelectedDate(date)}>
       <p>{dayOfTheWeek}</p>
       <p className={styles.card_day__date}>{dayOfTheMonth}</p>
       <div className={styles.card_day__points}>
