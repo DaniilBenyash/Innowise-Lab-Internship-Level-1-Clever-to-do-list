@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useRef, createRef, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import styles from './Calendar.module.scss';
 import { CardDay } from '../CardDay/CardDay';
 import { useTasks } from '../../features/tasks/useTasks';
+import { useCalndar } from './useCalendar';
 
 export const Calendar = ({ selectedDate, setSelectedDate }) => {
+  const [numberDays, lastDay] = useCalndar();
   // Создание массива дат
   const [days, setDays] = useState([]);
-  const [numberDays, setNumberDays] = useState(30);
 
   useEffect(() => {
     const date = new Date();
     const days = [];
-
+    console.log(numberDays);
     for (let i = 0; i < numberDays; i++) {
       days.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
       date.setDate(date.getDate() + 1);
@@ -21,28 +22,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
   }, [numberDays]);
   //-----//
   // Реализация бесконечного скроллинга
-  const lastItem = createRef();
-  const observerLoader = useRef();
 
-  const actionInSight = useCallback(
-    (entries) => {
-      if (entries[0].isIntersecting) {
-        setNumberDays(numberDays + 30);
-      }
-    },
-    [numberDays]
-  );
-
-  useEffect(() => {
-    if (observerLoader.current) {
-      observerLoader.current.disconnect();
-    }
-
-    observerLoader.current = new IntersectionObserver(actionInSight);
-    if (lastItem.current) {
-      observerLoader.current.observe(lastItem.current);
-    }
-  }, [actionInSight, lastItem]);
   //-----//
   // Создание списка дней с задачами
   const { tasks } = useTasks();
@@ -66,7 +46,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
             date={day}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
-            ref={lastItem}
+            ref={lastDay}
             daysWithTasks={daysWithTasks}
           />
         ) : (
