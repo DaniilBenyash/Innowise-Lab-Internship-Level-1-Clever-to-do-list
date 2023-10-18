@@ -14,24 +14,23 @@ export const CardDay = forwardRef(function Hello(
   const CardDayClass = classNames(styles.card_day, {
     [styles.card_day_selected_date]: selectedDate === date
   });
+
+  const handleClickButton = () => setSelectedDate(date);
   return (
-    <button ref={ref} className={CardDayClass} onClick={() => setSelectedDate(date)}>
+    <button ref={ref} className={CardDayClass} onClick={handleClickButton}>
       <p>{dayOfTheWeek}</p>
       <p className={styles.card_day__date}>{dayOfTheMonth}</p>
       <div className={styles.card_day__points}>
-        {daysWithTasks[date] ? (
-          daysWithTasks[date].map((el, id) => {
-            return (
-              <div
-                key={id}
-                className={`${styles.card_day__point} ${
-                  el ? styles.card_day__point_done : styles.card_day__point_notDone
-                }`}></div>
-            );
-          })
-        ) : (
-          <div></div>
-        )}
+        {daysWithTasks[date]?.map((day, id) => {
+          return (
+            <div
+              key={id}
+              className={classNames(styles.card_day__point, {
+                [styles.card_day__point_done]: day,
+                [styles.card_day__point_notDone]: !day
+              })}></div>
+          );
+        })}
       </div>
     </button>
   );
