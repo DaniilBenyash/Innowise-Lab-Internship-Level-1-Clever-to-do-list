@@ -1,4 +1,4 @@
-import { FirebaseAuth } from './Firebase';
+import { FirebaseAuth } from './firebase';
 
 class AuthService {
   constructor(DataBaseAuth) {

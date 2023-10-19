@@ -1,23 +1,9 @@
-import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getDatabase, ref, onValue, child, get, set } from 'firebase/database';
-
-export class FirebaseInitialization {
-  constructor(config) {
-    this.config = JSON.parse(config);
-  }
-
-  initialization() {
-    this.app = initializeApp(this.config);
-    getDatabase(this.app);
-  }
-}
-
-export const firebase = new FirebaseInitialization(process.env.REACT_APP_FIREBASE_CONFIG);
+import { ref, onValue, child, get, set } from 'firebase/firebase';
+import { firebase } from '../firebaseInit';
 
 export class FirebaseAuth {
   constructor() {
-    this.firebaseInit = firebase.initialization();
     this.auth = getAuth();
   }
 
@@ -39,12 +25,11 @@ export class FirebaseAuth {
 
 export class FirebaseTodo {
   constructor() {
-    this.db = getDatabase();
-    this.dbRef = ref(getDatabase());
+    this.dbRef = ref(firebase);
   }
 
   async getTasks(userId) {
-    const starCountRef = ref(this.db, userId);
+    const starCountRef = ref(firebase, userId);
     const promiseGetTasks = new Promise((res) => {
       onValue(starCountRef, (snapshot) => {
         res(snapshot.val());
@@ -59,7 +44,7 @@ export class FirebaseTodo {
         const tasks = snapshot.val().map((task) => {
           return task.id === taskId ? { ...task, status: !task.status } : task;
         });
-        set(ref(this.db, userId), [...tasks]);
+        set(ref(firebase, userId), [...tasks]);
       }
     });
     return await this.getTasks(userId);
@@ -67,7 +52,7 @@ export class FirebaseTodo {
 
   async postTask(task, userId) {
     await get(child(this.dbRef, userId)).then((snapshot) => {
-      set(ref(this.db, userId), snapshot.exists() ? [...snapshot.val(), task] : [task]);
+      set(ref(firebase, userId), snapshot.exists() ? [...snapshot.val(), task] : [task]);
     });
     return await this.getTasks(userId);
   }
@@ -76,7 +61,7 @@ export class FirebaseTodo {
     await get(child(this.dbRef, userId)).then((snapshot) => {
       if (snapshot.exists()) {
         const tasks = snapshot.val().map((el) => (el.id === task.id ? task : el));
-        set(ref(this.db, userId), [...tasks]);
+        set(ref(firebase, userId), [...tasks]);
       }
     });
     return await this.getTasks(userId);

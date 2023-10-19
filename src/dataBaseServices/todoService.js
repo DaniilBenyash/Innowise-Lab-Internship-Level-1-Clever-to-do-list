@@ -1,8 +1,8 @@
-import { FirebaseTodo } from './Firebase';
+import { FirebaseTodo } from './firebase';
 
 class TodoService {
-  constructor(DataBaseTodo) {
-    this.DataBaseTodo = new DataBaseTodo();
+  constructor(dataBaseTodo) {
+    this.DataBaseTodo = dataBaseTodo;
   }
 
   async getTasks(userId) {
@@ -26,4 +26,4 @@ class TodoService {
   }
 }
 
-export const todoService = new TodoService(FirebaseTodo);
+export const todoService = new TodoService(new FirebaseTodo());
