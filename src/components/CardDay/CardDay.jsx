@@ -1,5 +1,6 @@
 import styles from './CardDay.module.scss';
 import { forwardRef } from 'react';
+import { Button } from '../Button/Button';
 import { WEEK, MONTH } from '../../variables/days';
 import classNames from 'classnames';
 
@@ -17,7 +18,7 @@ export const CardDay = forwardRef(function Hello(
 
   const handleSelectedDate = () => setSelectedDate(date);
   return (
-    <button ref={ref} className={CardDayClass} onClick={handleSelectedDate}>
+    <Button ref={ref} className={CardDayClass} onClick={handleSelectedDate}>
       <p>{dayOfTheWeek}</p>
       <p className={styles.card_day__date}>{dayOfTheMonth}</p>
       <div className={styles.card_day__points}>
@@ -32,6 +33,6 @@ export const CardDay = forwardRef(function Hello(
           );
         })}
       </div>
-    </button>
+    </Button>
   );
 });

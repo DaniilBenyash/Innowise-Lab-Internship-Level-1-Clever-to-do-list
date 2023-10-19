@@ -1,16 +1,15 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { FirebaseTodoService } from '../firebaseServices/FirebaseTodoService';
+import { todoService } from '../dataBaseServices/todoService';
 import { store } from '../redux/store';
 
 export function* fetchGetTasks(action) {
   try {
-    const id = action.payload;
-    const firebase = new FirebaseTodoService(id);
-    const tasks = yield firebase.getTasks();
+    const userId = action.payload;
+    const tasks = yield todoService.getTasks(userId);
 
     yield put(store.dispatch({ type: 'tasks/setTasks', payload: tasks }));
   } catch (error) {
-    yield console.log(error);
+    yield alert(error);
   }
 }
 

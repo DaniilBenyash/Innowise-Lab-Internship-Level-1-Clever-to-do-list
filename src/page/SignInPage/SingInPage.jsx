@@ -8,7 +8,7 @@ import { Form } from '../../components/Form/Form';
 export const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('error');
+  const [error, setError] = useState('');
 
   const changeInputEmail = (email) => setEmail(email);
   const changeInputPassword = (password) => setPassword(password);
@@ -17,13 +17,18 @@ export const SignInPage = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setError(signInError);
-  }, [signInError]);
+  const userHandler = (userData, error) => {
+    try {
+      if (userData) navigate(MAIN_PAGE);
+      if (error) throw new Error(error);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   useEffect(() => {
-    userData && navigate(MAIN_PAGE);
-  }, [userData, navigate]);
+    userHandler(userData, signInError);
+  }, [userData, signInError]);
 
   function handleSubmit() {
     const formData = {

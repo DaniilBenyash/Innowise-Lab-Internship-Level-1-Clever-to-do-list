@@ -1,10 +1,9 @@
 import { ThemeProvider } from './components/ThemeProvider/ThemeProvider';
 import { RoutesComponent } from './Router/RoutesComponent/RoutesComponent';
-import { FirebaseClass } from './firebaseServices/Firebase';
+import { firebase } from './dataBaseServices/Firebase';
 
 export const App = () => {
-  const firebase = new FirebaseClass(process.env.REACT_APP_FIREBASE_CONFIG);
-  firebase.getDB();
+  firebase.initialization();
 
   return (
     <ThemeProvider>

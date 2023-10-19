@@ -6,18 +6,11 @@ const initialState = {
 
 export default function userDataReducer(state = initialState, action) {
   switch (action.type) {
-    case 'userData/signIn': {
-      return state;
-    }
     case 'userData/signInFailure': {
-      console.log(action.payload);
       return {
         ...state,
         signInError: action.payload
       };
-    }
-    case 'userData/signUp': {
-      return state;
     }
     case 'userData/signUpFailure': {
       return {

@@ -11,12 +11,13 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
 
   useEffect(() => {
     const date = new Date();
-    const days = [];
-
-    for (let i = 0; i < numberDays; i++) {
-      days.push(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
-      date.setDate(date.getDate() + 1);
-    }
+    let i = 0;
+    const days = new Array(numberDays).fill(0).map(() => {
+      date.setDate(date.getDate() + i);
+      i = 1;
+      const day = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+      return day;
+    });
 
     setDays(days);
   }, [numberDays]);
@@ -24,7 +25,6 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
   const { tasks } = useTasks();
   const daysWithTasks = useMemo(() => {
     if (!tasks) return;
-
     const days = tasks.reduce((days, task) => {
       const day = task.date;
       days[day] ? days[day].push(task.status) : (days[day] = [task.status]);

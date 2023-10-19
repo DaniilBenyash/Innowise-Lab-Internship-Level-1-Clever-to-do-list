@@ -1,17 +1,17 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import { store } from '../redux/store';
-import { FirebaseTodoService } from '../firebaseServices/FirebaseTodoService';
+import { todoService } from '../dataBaseServices/todoService';
 
 export function* changeStatusTask(action) {
   try {
     const userId = action.payload.userId;
     const taskId = action.payload.taskId;
-    const firebase = new FirebaseTodoService(userId);
-    const tasks = yield firebase.changeStatusTask(taskId);
+
+    const tasks = yield todoService.changeStatusTask(taskId, userId);
 
     yield put(store.dispatch({ type: 'tasks/setTasks', payload: tasks }));
   } catch (error) {
-    console.log(error);
+    yield alert(error);
   }
 }
 
