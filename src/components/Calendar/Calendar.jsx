@@ -3,6 +3,7 @@ import styles from './Calendar.module.scss';
 import { CardDay } from '../CardDay/CardDay';
 import { useTasks } from '../../features/tasks/useTasks';
 import { useCalendar } from './useCalendar';
+import { getListDate } from '../../utils/getListDates';
 
 export const Calendar = ({ selectedDate, setSelectedDate }) => {
   const [numberDays, lastDay] = useCalendar();
@@ -10,15 +11,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
   const [days, setDays] = useState([]);
 
   useEffect(() => {
-    const date = new Date();
-    let i = 0;
-    const days = new Array(numberDays).fill(0).map(() => {
-      date.setDate(date.getDate() + i);
-      i = 1;
-      const day = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-      return day;
-    });
-
+    const days = getListDate(numberDays);
     setDays(days);
   }, [numberDays]);
 
