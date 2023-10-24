@@ -10,14 +10,14 @@
     }
 
     &__user_panel{
-        
         font-size: 18px;
-        button {
-            background-color: none;
-            border: none;
-            cursor: pointer;
-            margin-left: 10px;
-        }
+    }
+
+    &__button{
+        background-color: none;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
     }
 }
 

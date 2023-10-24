@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useUserData } from '../../features/userData/useUserData';
 import { MAIN_PAGE } from '../../variables/routes';
 import { Image } from '../Image/Image';
+import { Button } from '../Button/Button';
 
 export const Header = ({ user }) => {
   const { deleteUser } = useUserData();
@@ -14,14 +15,14 @@ export const Header = ({ user }) => {
       </Link>
       <div className={styles.header__user_panel}>
         Hello, {user.email}
-        <button onClick={deleteUser}>
+        <Button onClick={deleteUser} className={styles.header__button}>
           <Image
             width="35"
             height="35"
             src="https://img.icons8.com/ios-filled/50/fire-exit.png"
             alt="exit"
           />
-        </button>
+        </Button>
       </div>
     </header>
   );

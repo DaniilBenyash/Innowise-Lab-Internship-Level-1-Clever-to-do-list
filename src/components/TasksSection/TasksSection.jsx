@@ -1,5 +1,6 @@
 import styles from './TasksSection.module.scss';
 import { Task } from '../Task/Task';
+import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 import { useTasks } from '../../features/tasks/useTasks';
 import { useUserData } from '../../features/userData/useUserData.js';
@@ -31,7 +32,7 @@ export const TasksSection = ({ tasks, selectedDate }) => {
         );
       })}
       <Link to={TASK_PAGE_ID('create')}>
-        <button className={styles.tasks_section__button}>Create task</button>
+        <Button className={styles.tasks_section__button} text="Create task" />
       </Link>
     </section>
   );

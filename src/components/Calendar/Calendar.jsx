@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import styles from './Calendar.module.scss';
 import { CardDay } from '../CardDay/CardDay';
 import { useTasks } from '../../features/tasks/useTasks';
@@ -8,12 +8,7 @@ import { getListDate } from '../../utils/getListDates';
 export const Calendar = ({ selectedDate, setSelectedDate }) => {
   const [numberDays, lastDay] = useCalendar();
 
-  const [days, setDays] = useState([]);
-
-  useEffect(() => {
-    const days = getListDate(numberDays);
-    setDays(days);
-  }, [numberDays]);
+  const listDays = useCallback(getListDate(numberDays), [numberDays]);
 
   const { tasks } = useTasks();
 
@@ -37,8 +32,8 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
 
   return (
     <section className={styles.calendar}>
-      {days.map((day, id) => {
-        return id === days.length - 1 ? (
+      {listDays.map((day, id, arr) => {
+        return id === arr.length - 1 ? (
           <CardDay
             key={day}
             date={day}
