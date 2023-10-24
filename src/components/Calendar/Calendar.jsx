@@ -16,11 +16,19 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
   }, [numberDays]);
 
   const { tasks } = useTasks();
+
   const daysWithTasks = useMemo(() => {
     if (!tasks) return;
+
     const days = tasks.reduce((days, task) => {
       const day = task.date;
-      days[day] ? days[day].push(task.status) : (days[day] = [task.status]);
+
+      if (days[day]) {
+        days[day].push(task.status);
+      } else {
+        days[day] = [task.status];
+      }
+
       return days;
     }, {});
 
@@ -37,7 +45,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
             ref={lastDay}
-            daysWithTasks={daysWithTasks}
+            pointsOfTask={daysWithTasks[day]}
           />
         ) : (
           <CardDay
@@ -45,7 +53,7 @@ export const Calendar = ({ selectedDate, setSelectedDate }) => {
             date={day}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
-            daysWithTasks={daysWithTasks}
+            pointsOfTask={daysWithTasks[day]}
           />
         );
       })}
