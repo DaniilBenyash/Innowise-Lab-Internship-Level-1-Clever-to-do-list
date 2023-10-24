@@ -3,7 +3,7 @@ import { useUserData } from '../../features/userData/useUserData';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './SignInPage.module.scss';
 import { MAIN_PAGE, SIGN_UP } from '../../variables/routes';
-import { Form } from '../../components/Form/Form';
+import { AuthForm } from '../../components/AuthForm/AuthForm';
 
 export const SignInPage = () => {
   const [email, setEmail] = useState('');
@@ -43,7 +43,7 @@ export const SignInPage = () => {
       <div className={styles.sign_in__section}>
         <h1>Sign In</h1>
         <p className={styles.sign_in__error}>{error}</p>
-        <Form
+        <AuthForm
           valueEmail={email}
           onChangeEmail={changeInputEmail}
           valuePassword={password}

@@ -3,7 +3,7 @@ import { useUserData } from '../../features/userData/useUserData';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUpPage.module.scss';
 import { MAIN_PAGE } from '../../variables/routes';
-import { Form } from '../../components/Form/Form';
+import { AuthForm } from '../../components/AuthForm/AuthForm';
 
 export const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -38,7 +38,7 @@ export const SignUpPage = () => {
       <div className={styles.sign_up__section}>
         <h1>Sign Up</h1>
         <p className={styles.sign_up__error}>{error}</p>
-        <Form
+        <AuthForm
           valueEmail={email}
           onChangeEmail={changeInputEmail}
           valuePassword={password}

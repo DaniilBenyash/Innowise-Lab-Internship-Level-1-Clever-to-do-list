@@ -9,23 +9,24 @@ export const TasksSection = ({ tasks, selectedDate }) => {
   const { changeStatusTask } = useTasks();
   const { userData } = useUserData();
 
-  const taskFilter = tasks?.filter((task) => task.date === selectedDate);
+  const filteredTasks = tasks?.filter((task) => task.date === selectedDate);
 
   return (
     <section className={styles.tasks_section}>
       <h2>Tasks</h2>
-      {taskFilter?.map((task) => {
-        const TaskToChangeStatus = {
-          userId: userData.uid,
-          taskId: task.id
-        };
+      {filteredTasks?.map((task) => {
         return (
           <Task
             key={task.id}
             id={task.id}
             title={task.task}
             status={task.status}
-            onClick={() => changeStatusTask(TaskToChangeStatus)}
+            onClick={() =>
+              changeStatusTask({
+                userId: userData.uid,
+                taskId: task.id
+              })
+            }
           />
         );
       })}

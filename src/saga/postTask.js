@@ -6,10 +6,11 @@ export function* postTask(action) {
   try {
     const userId = action.payload.userId;
     const task = action.payload.task;
+    const tasks = yield todoService.getTasks(userId);
 
-    const tasks = yield todoService.postTask(task, userId);
+    const changedTasks = yield todoService.postTask(task, userId, tasks);
 
-    yield put(store.dispatch({ type: 'tasks/setTasks', payload: tasks }));
+    yield put(store.dispatch({ type: 'tasks/setTasks', payload: changedTasks }));
   } catch (error) {
     yield alert(error);
   }
