@@ -1,41 +1,4 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDatabase, ref, onValue, child, get, set } from 'firebase/database';
-
-export class FirebaseInitialization {
-  constructor(config) {
-    this.config = JSON.parse(config);
-  }
-
-  initialization() {
-    this.app = initializeApp(this.config);
-    getDatabase(this.app);
-  }
-}
-
-export const firebase = new FirebaseInitialization(process.env.REACT_APP_FIREBASE_CONFIG);
-
-export class FirebaseAuth {
-  constructor() {
-    this.firebaseInit = firebase.initialization();
-    this.auth = getAuth();
-  }
-
-  async signIn(email, password) {
-    const promiseSignIn = new Promise((res) => {
-      const response = signInWithEmailAndPassword(this.auth, email, password);
-      res(response);
-    });
-    return await promiseSignIn;
-  }
-  async signUp(email, password) {
-    const promiseSignUp = new Promise((res) => {
-      const response = createUserWithEmailAndPassword(this.auth, email, password);
-      res(response);
-    });
-    return await promiseSignUp;
-  }
-}
 
 export class FirebaseTodo {
   constructor() {

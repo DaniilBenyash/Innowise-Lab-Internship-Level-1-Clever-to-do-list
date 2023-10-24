@@ -7,9 +7,9 @@ export function* fetchSignIn(action) {
     const email = action.payload.email;
     const password = action.payload.password;
 
-    const user = yield authService.signIn(email, password);
+    const data = yield authService.signIn(email, password);
 
-    yield put(store.dispatch({ type: 'userData/getUser', payload: user }));
+    yield put(store.dispatch({ type: 'userData/getUser', payload: data.user }));
   } catch (error) {
     yield put(store.dispatch({ type: 'userData/signInFailure', payload: error.code }));
   }

@@ -1,4 +1,4 @@
-import { FirebaseTodo } from './Firebase';
+import { FirebaseTodo } from './firebaseDBService';
 
 class TodoService {
   constructor(DataBaseTodo) {

@@ -1,17 +1,26 @@
-import { FirebaseAuth } from './Firebase';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { firebase } from '../firebase';
 
-class AuthService {
-  constructor(DataBaseAuth) {
-    this.DataBaseAuth = new DataBaseAuth();
+export class FirebaseAuth {
+  constructor() {
+    this.firebaseInit = firebase.initialization();
+    this.auth = getAuth();
   }
+
   async signIn(email, password) {
-    const response = await this.DataBaseAuth.signIn(email, password);
-    return response.user;
+    const promiseSignIn = new Promise((res) => {
+      const response = signInWithEmailAndPassword(this.auth, email, password);
+      res(response);
+    });
+    return await promiseSignIn;
   }
   async signUp(email, password) {
-    const response = await this.DataBaseAuth.signUp(email, password);
-    return response.user;
+    const promiseSignUp = new Promise((res) => {
+      const response = createUserWithEmailAndPassword(this.auth, email, password);
+      res(response);
+    });
+    return await promiseSignUp;
   }
 }
 
-export const authService = new AuthService(FirebaseAuth);
+export const authService = new FirebaseAuth();
