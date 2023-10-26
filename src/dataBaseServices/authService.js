@@ -1,7 +1,7 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { firebase } from '../firebase';
 
-class IFirebaseAuth {
+class IAuthService {
   signIn() {
     throw new Error('You need to implement this method');
   }
@@ -11,7 +11,7 @@ class IFirebaseAuth {
   }
 }
 
-export class FirebaseAuth extends IFirebaseAuth {
+export class FirebaseAuth extends IAuthService {
   constructor() {
     super();
     this.firebaseInit = firebase.initialization();

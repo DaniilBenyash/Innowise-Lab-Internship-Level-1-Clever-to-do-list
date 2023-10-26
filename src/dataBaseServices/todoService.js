@@ -1,4 +1,4 @@
-import { FirebaseDBServices } from './firebaseDBServices';
+import { FirebaseDBService } from './firebaseDBServices';
 
 class ITodoService {
   getTasks() {
@@ -21,11 +21,11 @@ class ITodoService {
 class TodoService extends ITodoService {
   constructor(dataBaseTodo) {
     super();
-    this.DataBaseTodo = dataBaseTodo;
+    this.dataBaseTodo = dataBaseTodo;
   }
 
   async getTasks(userId) {
-    const response = await this.DataBaseTodo.getTasks(userId);
+    const response = await this.dataBaseTodo.getTasks(userId);
     return response;
   }
 
@@ -34,23 +34,23 @@ class TodoService extends ITodoService {
       return task.id === taskId ? { ...task, status: !task.status } : task;
     });
 
-    const response = await this.DataBaseTodo.setTasks(changedTasks, userId);
+    const response = await this.dataBaseTodo.setTasks(changedTasks, userId);
     return response;
   }
 
   async postTask(task, userId, tasks) {
     const changedTasks = tasks ? [...tasks, task] : [task];
 
-    const response = await this.DataBaseTodo.setTasks(changedTasks, userId);
+    const response = await this.dataBaseTodo.setTasks(changedTasks, userId);
     return response;
   }
 
   async updateTask(task, userId, tasks) {
     const changedTasks = tasks.map((el) => (el.id === task.id ? task : el));
 
-    const response = await this.DataBaseTodo.setTasks(changedTasks, userId);
+    const response = await this.dataBaseTodo.setTasks(changedTasks, userId);
     return response;
   }
 }
 
-export const todoService = new TodoService(new FirebaseDBServices());
+export const todoService = new TodoService(new FirebaseDBService());

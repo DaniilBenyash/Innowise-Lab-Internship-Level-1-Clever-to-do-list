@@ -1,36 +1,36 @@
 import { getDatabase, ref, onValue, set } from 'firebase/database';
 
-class IFirebaseDBServices {
-  getTasks() {
+class IDBServices {
+  getData() {
     throw new Error('You need to implement this method');
   }
 
-  setTasks() {
+  setData() {
     throw new Error('You need to implement this method');
   }
 }
 
-export class FirebaseDBServices extends IFirebaseDBServices {
+export class FirebaseDBService extends IDBServices {
   constructor() {
     super();
     this.db = getDatabase();
   }
 
-  async getTasks(userId) {
+  async getData(userId) {
     const starCountRef = ref(this.db, userId);
 
-    const promiseGetTasks = new Promise((res) => {
+    const promiseGetData = new Promise((res) => {
       onValue(starCountRef, (snapshot) => {
         res(snapshot.val());
       });
     });
 
-    return await promiseGetTasks;
+    return await promiseGetData;
   }
 
-  async setTasks(tasks, userId) {
+  async setData(tasks, userId) {
     await set(ref(this.db, userId), tasks);
 
-    return await this.getTasks(userId);
+    return await this.getData(userId);
   }
 }
