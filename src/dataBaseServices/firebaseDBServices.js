@@ -1,6 +1,6 @@
 import { getDatabase, ref, onValue, set } from 'firebase/database';
 
-class IDBServices {
+class IDBService {
   getData() {
     throw new Error('You need to implement this method');
   }
@@ -10,7 +10,7 @@ class IDBServices {
   }
 }
 
-export class FirebaseDBService extends IDBServices {
+export class FirebaseDBService extends IDBService {
   constructor() {
     super();
     this.db = getDatabase();
